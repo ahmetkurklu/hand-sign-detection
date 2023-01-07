@@ -6,6 +6,8 @@ cnt_img = 0
 
 #Initialisation de la webcamA
 capture = cv2.VideoCapture(0)
+capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 while True:
     #capture d'une image du flux de la webcam
