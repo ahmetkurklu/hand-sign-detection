@@ -1,10 +1,10 @@
 # image and video files
-*.png
-*.bmp
-*.tiff
-*.mp4
-*.avi
-*.mkv
-*.jpg
-*.jpeg
-*.pgm
+#*.png
+#*.bmp
+#*.tiff
+#*.mp4
+#*.avi
+#*.mkv
+#*.jpg
+#*.jpeg
+#*.pgm
