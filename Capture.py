@@ -38,7 +38,7 @@ while True:
     elif key%256 == 32:
         #Ecrit le roi dans le fichier
         roi = img[y1+2:y2-1, x1+2:x2-1]
-        img_name = "image\{0}\{0}_{1}.png".format(label,cnt_img)
+        img_name = "images\{0}\{0}_{1}.png".format(label,cnt_img)
         cv2.imwrite(img_name, roi)
         print("{} ecrit!".format(img_name))
         cnt_img += 1
