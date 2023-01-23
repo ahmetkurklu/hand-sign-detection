@@ -13,7 +13,7 @@ def visualize(original, augmented,type):
     plt.imshow(augmented)
     plt.show()
 
-image_path = "..\images\A\A_1.png"
+image_path = "..\images_rph\A\A_1.png"
 imagepil = Image.open(image_path)
 
 image_string = tf.io.read_file(image_path)
