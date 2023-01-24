@@ -37,12 +37,12 @@ while True:
     # ESPACE
     elif key%256 == 32:
         #Ecrit le roi dans le fichier
-        new_image = img[y1+2:y2-1, x1+2:x2-1]
+        #new_image = img[y1+2:y2-1, x1+2:x2-1]
         # Load the model from the H5 file
         loaded_model = load_model("hand_sign_detector.model")
 
         # Load the new image you want to predict
-        new_image = cv2.imread("images/validation/I/I_1.png")
+        #new_image = cv2.imread("images/validation/I/I_1.png")
 
         # Resize the image to the same size as the training images
         new_image = cv2.resize(new_image, (180, 180))
