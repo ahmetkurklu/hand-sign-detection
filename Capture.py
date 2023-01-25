@@ -2,21 +2,33 @@ import cv2
 
 #changer le label en fonction du dataset
 label = input("Entree le label : ")
-cnt_img = 0
+cnt_img = 30
+
+# #Initialisation de la webcamA
+# capture = cv2.VideoCapture(0)
+# x=720
+# y=640
+# capture.set(cv2.CAP_PROP_FRAME_WIDTH, x)
+# capture.set(cv2.CAP_PROP_FRAME_HEIGHT, y)
+
+
+# # coordonnées du rectangle a changé en fonction du label
+# x1 = 0
+# y1 = 0
+# x2 = x - 500
+# y2 = y - 400
 
 #Initialisation de la webcamA
 capture = cv2.VideoCapture(0)
-x=720
-y=640
-capture.set(cv2.CAP_PROP_FRAME_WIDTH, x)
-capture.set(cv2.CAP_PROP_FRAME_HEIGHT, y)
+capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 
 # coordonnées du rectangle a changé en fonction du label
-x1 = 0
-y1 = 0
-x2 = x - 500
-y2 = y - 400
+x1 = 0 + 500
+y1 = 0 + 250
+x2 = 1280 - 500
+y2 = 720 - 200
 
 while True:
     #capture d'une image du flux de la webcam
@@ -40,7 +52,7 @@ while True:
     elif key%256 == 32:
         #Ecrit le roi dans le fichier
         roi = img[y1+2:y2-1, x1+2:x2-1]
-        img_name = ".\images_rph\{0}\{0}_{1}.png".format(label,cnt_img)
+        img_name = "image2/train/{0}/{0}_{1}.png".format(label,cnt_img)
         cv2.imwrite(img_name, roi)
         print("{} ecrit!".format(img_name))
         cnt_img += 1

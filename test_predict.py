@@ -42,7 +42,7 @@ while True:
         loaded_model = load_model("test.h5")
 
         # Load the new image you want to predict
-        new_image = cv2.imread("images/validation/I/I_1.png")
+        #new_image = cv2.imread("images/validation/I/I_1.png")
 
         # Resize the image to the same size as the training images
         new_image = cv2.resize(new_image, (50, 50))

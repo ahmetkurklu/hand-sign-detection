@@ -2,7 +2,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import pathlib
 
-train_folder = "images/train"
+train_folder = "image2/train"
 #train_folder = "./images/train" #a changer
 data_dir = pathlib.Path(train_folder)
 image_count = len(list(data_dir.glob('*/*.png')))
@@ -57,6 +57,8 @@ model = tf.keras.Sequential([
   tf.keras.layers.Dense(num_classes)
 ])
 
+
+
 model.compile(
   optimizer='adam',
   loss=tf.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -65,7 +67,7 @@ model.compile(
 model.fit(
   train_dataset,
   validation_data=val_dataset,
-  epochs=6
+  epochs=10
 )
 # epochs : nombre d'itération du training
 
