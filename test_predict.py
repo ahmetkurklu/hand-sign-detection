@@ -37,15 +37,15 @@ while True:
     # ESPACE
     elif key%256 == 32:
         #Ecrit le roi dans le fichier
-        #new_image = img[y1+2:y2-1, x1+2:x2-1]
+        new_image = img[y1+2:y2-1, x1+2:x2-1]
         # Load the model from the H5 file
-        loaded_model = load_model("hand_sign_detector.model")
+        loaded_model = load_model("test.h5")
 
         # Load the new image you want to predict
-        #new_image = cv2.imread("images/validation/I/I_1.png")
+        new_image = cv2.imread("images/validation/I/I_1.png")
 
         # Resize the image to the same size as the training images
-        new_image = cv2.resize(new_image, (180, 180))
+        new_image = cv2.resize(new_image, (50, 50))
 
         # Convert the image to a numpy array and normalize the pixel values
         new_image = np.array(new_image) / 255.0
