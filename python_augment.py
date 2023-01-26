@@ -1,6 +1,6 @@
 import Augmentor
 
-p = Augmentor.Pipeline("images_rph/N/")
+p = Augmentor.Pipeline("images_rph/A/")
 p.zoom(probability=0.3,min_factor=0.8,max_factor=1.5)
 
 p.flip_top_bottom(probability=0.4)

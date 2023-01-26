@@ -6,15 +6,17 @@ from keras.preprocessing.image import ImageDataGenerator
 
 #Initialisation de la webcamA
 capture = cv2.VideoCapture(0)
-capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+x=720
+y=640
+capture.set(cv2.CAP_PROP_FRAME_WIDTH, x)
+capture.set(cv2.CAP_PROP_FRAME_HEIGHT, y)
 
 
 # coordonnées du rectangle a changé en fonction du label
-x1 = 0 + 500
-y1 = 0 + 250
-x2 = 1280 - 500
-y2 = 720 - 200
+x1 = 0
+y1 = 0
+x2 = x - 500
+y2 = y - 400
 
 while True:
     #capture d'une image du flux de la webcam
@@ -42,7 +44,7 @@ while True:
         loaded_model = load_model("hand_sign_detector.model")
 
         # Load the new image you want to predict
-        new_image = cv2.imread("images/validation/I/I_1.png")
+        # new_image = cv2.imread("images/validation/I/I_1.png")
 
         # Resize the image to the same size as the training images
         new_image = cv2.resize(new_image, (180, 180))
