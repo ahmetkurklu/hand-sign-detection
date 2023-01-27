@@ -8,6 +8,7 @@ from cvzone import HandTrackingModule
 #Initialisation de la webcamA
 capture = cv2.VideoCapture(0)
 detector = HandTrackingModule.HandDetector()
+loaded_model = load_model("model_save/test_avec_crop_mediapipe.h5")
 
 while True:
     #capture d'une image du flux de la webcam
@@ -34,7 +35,7 @@ while True:
         bbox_value = hands[0].get('bbox')
         new_image = img_copy[bbox_value[1]:bbox_value[1] + bbox_value[3], bbox_value[0]:bbox_value[0] + bbox_value[2]]
         # Load the model from the H5 file
-        loaded_model = load_model("test.h5")
+        
 
         # Resize the image to the same size as the training images
         new_image = cv2.resize(new_image, (50, 50))
