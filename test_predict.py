@@ -2,31 +2,23 @@ from keras.models import load_model
 import cv2
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
+from cvzone import HandTrackingModule
 
 
 #Initialisation de la webcamA
 capture = cv2.VideoCapture(0)
-x=720
-y=640
-capture.set(cv2.CAP_PROP_FRAME_WIDTH, x)
-capture.set(cv2.CAP_PROP_FRAME_HEIGHT, y)
-
-
-# coordonnées du rectangle a changé en fonction du label
-x1 = 0
-y1 = 0
-x2 = x - 500
-y2 = y - 400
+detector = HandTrackingModule.HandDetector()
 
 while True:
     #capture d'une image du flux de la webcam
     ret,img = capture.read()
+    ret,img = capture.read()
+    img_copy = img.copy()
+    hands, img = detector.findHands(img)
+    
     if not ret:
         print("Erreur lors de la lecture de img")
         break
-
-    # Trace le rectangle sur l'image
-    cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
     #Affichage de l'image
     cv2.imshow("Image", img)
@@ -39,16 +31,10 @@ while True:
     # ESPACE
     elif key%256 == 32:
         #Ecrit le roi dans le fichier
-        new_image = img[y1+2:y2-1, x1+2:x2-1]
+        bbox_value = hands[0].get('bbox')
+        new_image = img_copy[bbox_value[1]:bbox_value[1] + bbox_value[3], bbox_value[0]:bbox_value[0] + bbox_value[2]]
         # Load the model from the H5 file
         loaded_model = load_model("test.h5")
-
-        # Load the new image you want to predict
-<<<<<<< HEAD
-        # new_image = cv2.imread("images/validation/I/I_1.png")
-=======
-        #new_image = cv2.imread("images/validation/I/I_1.png")
->>>>>>> 75105a3411ac30f5680d35b15c013b5ef7128a20
 
         # Resize the image to the same size as the training images
         new_image = cv2.resize(new_image, (50, 50))
@@ -71,3 +57,5 @@ while True:
 
 capture.release()
 cv2.destroyAllWindows()
+
+    
