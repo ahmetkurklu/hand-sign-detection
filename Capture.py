@@ -35,7 +35,7 @@ while True:
         #Ecrit le roi dans le fichier
         roi = img_copy[bbox_value[1]:bbox_value[1] + bbox_value[3], bbox_value[0]:bbox_value[0] + bbox_value[2]]
 
-        img_name = "image3/train/{0}/{0}_{1}.png".format(label,cnt_img)
+        img_name = "images_rph/{0}/{0}_{1}r.png".format(label,cnt_img)
         cv2.imwrite(img_name, roi)
         print("{} ecrit!".format(img_name))
         cnt_img += 1

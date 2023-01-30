@@ -2,7 +2,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import pathlib
 
-train_folder = "image2/train"
+train_folder = "image_final"
 #train_folder = "./images/train" #a changer
 data_dir = pathlib.Path(train_folder)
 image_count = len(list(data_dir.glob('*/*.png')))
@@ -72,4 +72,4 @@ model.fit(
 # epochs : nombre d'itération du training
 
 
-model.save("hand_sign_detector.model", save_format="h5")
+model.save("./model_save/hand_sign_detector_final.h5", save_format="h5")
