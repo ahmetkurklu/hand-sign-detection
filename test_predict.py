@@ -10,9 +10,19 @@ capture = cv2.VideoCapture(0)
 detector = HandTrackingModule.HandDetector()
 loaded_model = load_model("model_save/test_avec_crop_mediapipe.h5")
 
+classData = {
+    0 : "A",
+    1 : "B",
+    2 : "C",
+    3 : "G",
+    4 : "H",
+    5 : "I",
+    6 : "L",
+    7 : 'V'
+}
 while True:
     #capture d'une image du flux de la webcam
-    ret,img = capture.read()
+    # ret,img = capture.read()
     ret,img = capture.read()
     img_copy = img.copy()
     hands, img = detector.findHands(img)
@@ -21,8 +31,7 @@ while True:
         print("Erreur lors de la lecture de img")
         break
 
-    #Affichage de l'image
-    cv2.imshow("Image", img)
+    
 
     key = cv2.waitKey(1)
     # ESC 
@@ -30,13 +39,12 @@ while True:
         print("ESC, fermeture...")
         break
     # ESPACE
-    elif key%256 == 32:
+    # elif key%256 == 32:
+    if hands != []:
         #Ecrit le roi dans le fichier
         bbox_value = hands[0].get('bbox')
         new_image = img_copy[bbox_value[1]:bbox_value[1] + bbox_value[3], bbox_value[0]:bbox_value[0] + bbox_value[2]]
-        # Load the model from the H5 file
         
-
         # Resize the image to the same size as the training images
         new_image = cv2.resize(new_image, (50, 50))
 
@@ -48,13 +56,17 @@ while True:
 
         # Use the predict method to get the model's predictions
         predictions = loaded_model.predict(new_image)
-
         # Get the index of the class with the highest probability
         class_index = np.argmax(predictions[0])
 
-        print(predictions)
-
-        print("Predicted class index:", class_index)
+        # print(predictions)
+        results = predictions[0].tolist()
+        # print(results)
+        # print("Predicted class index:", class_index)
+        cv2.putText(img, f"signe : {classData[class_index]} [{(results[class_index]*100):.2f}%]", (30, 30), cv2.FONT_HERSHEY_PLAIN,2, (255, 0, 0), 2)
+        
+    #Affichage de l'image
+    cv2.imshow("Image", img)
 
 capture.release()
 cv2.destroyAllWindows()
