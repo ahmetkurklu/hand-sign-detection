@@ -8,7 +8,7 @@ from cvzone import HandTrackingModule
 #Initialisation de la webcamA
 capture = cv2.VideoCapture(0)
 detector = HandTrackingModule.HandDetector()
-loaded_model = load_model("model_save/hand_sign_detector_final.h5")
+loaded_model = load_model("model_save/model_final.h5")
 
 classData = {
     0 : "A",
@@ -46,7 +46,7 @@ while True:
         new_image = img_copy[bbox_value[1]:bbox_value[1] + bbox_value[3], bbox_value[0]:bbox_value[0] + bbox_value[2]]
         
         # Resize the image to the same size as the training images
-        new_image = cv2.resize(new_image, (180, 180))
+        new_image = cv2.resize(new_image, (50, 50))
 
         # Convert the image to a numpy array and normalize the pixel values
         new_image = np.array(new_image) / 255.0
