@@ -8,7 +8,7 @@ from cvzone import HandTrackingModule
 #Initialisation de la webcamA
 capture = cv2.VideoCapture(0)
 detector = HandTrackingModule.HandDetector()
-loaded_model = load_model("model_save/model_final.h5")
+loaded_model = load_model("model_save/model_avec_gauss.h5")
 
 classData = {
     0 : "A",
@@ -18,7 +18,9 @@ classData = {
     4 : "H",
     5 : "I",
     6 : "L",
-    7 : 'V'
+    7 : 'R',
+    8 : 'V',
+    9 : 'W'
 }
 while True:
     #capture d'une image du flux de la webcam
@@ -44,6 +46,8 @@ while True:
         #Ecrit le roi dans le fichier
         bbox_value = hands[0].get('bbox')
         new_image = img_copy[bbox_value[1]:bbox_value[1] + bbox_value[3], bbox_value[0]:bbox_value[0] + bbox_value[2]]
+
+        new_image = cv2.GaussianBlur(new_image, (5, 5), 0)
         
         # Resize the image to the same size as the training images
         new_image = cv2.resize(new_image, (50, 50))
